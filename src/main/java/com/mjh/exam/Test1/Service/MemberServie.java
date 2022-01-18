@@ -1,0 +1,49 @@
+package com.mjh.exam.Test1.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mjh.exam.Test1.Dao.MemberDao;
+import com.mjh.exam.Test1.Dto.Member;
+
+@Service
+public class MemberServie {
+	@Autowired
+	private MemberDao memberDao;
+
+	public int dojoin(String loginId, String loginPw,String name, String nickName,
+			String cellphoneNo, String email) {
+		Member oldMember = getMemberbyId(loginId);
+		
+		if(oldMember != null) {
+			return -1;
+		}
+		
+		oldMember = getMemberbyNameAndEmail(name,email);
+		
+		if(oldMember != null) {
+			return -2;
+		}
+		
+		memberDao.doJoin(loginId,loginPw,name,nickName,cellphoneNo,email);
+		
+		return memberDao.getLastInsertId();
+	}
+
+	private Member getMemberbyNameAndEmail(String name, String email) {
+		
+		return memberDao.getMemberbyNameAndEmail(name,email);
+	}
+
+	private Member getMemberbyId(String loginId) {
+		
+		return memberDao.getMemberbyId(loginId);
+	}
+
+	public Member getMemberByLoginId(String loginId) {
+
+		return memberDao.getMemberByLoginId(loginId);
+	}
+
+
+}
