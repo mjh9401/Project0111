@@ -146,45 +146,51 @@ body {
 			<div class="UserId">
 				<h3>아이디</h3>
 				<div class="inputId">
-					<input id="loginId" name="loginId" type="text">
+					<input id="loginId" name="loginId" type="text" onkeyup="checkLoginIdDup()">
 				</div>
-				<p class="loginId-msg"></p>
+				<p class="loginId-msg" style="color:red; font-weight: bold;"></p>
 			</div>
 			<div class="password">
 				<h3>비밀번호</h3>
 				<div class="inputId">
-					<input id="loginPw" name="loginPw" type="password">
+					<input id="loginPw" name="loginPw" type="password" onkeyup="checkEmptyPw()">
 				</div>
+				<p class="loginPw-msg" style="color:red; font-weight: bold;"></p>				
 			</div>
 			<div class="passwordConfirm">
 				<h3>비밀번호 재확인</h3>
 				<div class="inputId">
-					<input id="loginPwConfirm" name="loginPwConfirm" type="password">
+					<input id="loginPwConfirm" name="loginPwConfirm" type="password" onkeyup="checkEmptyPwConfirm()">
 				</div>
+				<p class="loginPwConfirm-msg" style="color:red; font-weight: bold;"></p>								
 			</div>
 			<div class="name">
 				<h3>이름</h3>
 				<div class="inputId">
-					<input id="name" name="name" type="text">
+					<input id="name" name="name" type="text" onkeyup="checkEmptyName()">
 				</div>
+				<p class="name-msg" style="color:red; font-weight: bold;"></p>							
 			</div>
 			<div class="nickName">
 				<h3>닉네임</h3>
 				<div class="inputId">
-					<input id="nickName" name="nickName" type="text">
+					<input id="nickName" name="nickName" type="text" onkeyup="checkEmptynickName()">
 				</div>
+				<p class="nickName-msg" style="color:red; font-weight: bold;"></p>											
 			</div>
 			<div class="phoneNumeber">
 				<h3>휴대전화</h3>
 				<div class="inputId">
-					<input id="cellphoneNo" name="cellphoneNo" type="tel">
+					<input id="cellphoneNo" name="cellphoneNo" type="tel" onkeyup="checkEmptyTel()">
 				</div>
+				<p class="cellphoneNo-msg" style="color:red; font-weight: bold;"></p>																			
 			</div>
 			<div class="email">
 				<h3>이메일</h3>
 				<div class="inputId">
-					<input id="email" name="email" type="email">
+					<input id="email" name="email" type="email" onkeyup="checkEmptyEmail()">
 				</div>
+				<p class="email-msg" style="color:red; font-weight: bold;"></p>															
 			</div>
 		</div>
 		<div class="button-wrap">
@@ -194,20 +200,118 @@ body {
 </div>
 
 <script>
-	let loginId = document.getElementById('loginId').value;
+	function checkLoginIdDup(){
+		const loginId = document.getElementById('loginId').value;
+
+		$.get('../member/getLoginIdDup', {
+			isAjax : 'Y',
+			loginId : loginId
+		}, function(data) {
+			$('.loginId-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
 	
-	$.get('/member/getLoginIdDup', {
-		isAjax : 'Y',
-		loginId : loginId
-	}, function(data) {
-		console.log(data);
-		$('.loginId-msg').html(data);
-		if (data.success) {
-			console.log('성공했습니다.');
-		} else {
-			console.log('실패했습니다.');
-		}
-	},'json');
+	function checkEmptyPw(){
+		const loginPw = document.getElementById('loginPw').value;
+		
+		$.get('../member/EmptyCheckLoginPw', {
+			isAjax : 'Y',
+			loginPw : loginPw
+		}, function(data) {
+			$('.loginPw-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+
+	}
+	
+	function checkEmptyPwConfirm(){
+		const loginPwConfirm = document.getElementById('loginPwConfirm').value;
+		
+		$.get('../member/EmptyCheckLoginPwConfirm', {
+			isAjax : 'Y',
+			loginPwConfirm : loginPwConfirm
+		}, function(data) {
+			$('.loginPwConfirm-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
+	
+	function checkEmptyName(){
+		const name = document.getElementById('name').value;
+		
+		$.get('../member/EmptyCheckName', {
+			isAjax : 'Y',
+			name : name
+		}, function(data) {
+			$('.name-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
+	
+	function checkEmptynickName(){
+		const nickName = document.getElementById('nickName').value;
+		
+		$.get('../member/EmptyCheckNickname', {
+			isAjax : 'Y',
+			nickName : nickName
+		}, function(data) {
+			$('.nickName-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
+	
+	function checkEmptyTel(){
+		const cellphoneNo = document.getElementById('cellphoneNo').value;
+		
+		$.get('../member/EmptyChecktel', {
+			isAjax : 'Y',
+			cellphoneNo : cellphoneNo
+		}, function(data) {
+			$('.cellphoneNo-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
+	
+	function checkEmptyEmail(){
+		const email = document.getElementById('email').value;
+		
+		$.get('../member/EmptyCheckEmail', {
+			isAjax : 'Y',
+			email : email
+		}, function(data) {
+			$('.email-msg').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
 </script>
 
 <%@ include file="../common/footer.jspf"%>

@@ -81,4 +81,64 @@ public class MemberController {
 		return "사용가능한 아이디입니다.";
 	}
 	
+	@RequestMapping("member/EmptyCheckLoginPw")
+	@ResponseBody
+	public String EmptyCheckLoginPw(String loginPw) {
+		if(Ut.empty(loginPw)) {
+			return "비밀번호를 입력해주세요";
+		}
+		
+		return "";
+	}
+	
+	@RequestMapping("member/EmptyCheckLoginPwConfirm")
+	@ResponseBody
+	public String EmptyCheckLoginPwConfirm(String loginPwConfirm) {
+		if(Ut.empty(loginPwConfirm)) {
+			return "비밀번호 재확인을 입력해주세요";
+		}
+		
+		return "";
+	}
+	
+	@RequestMapping("member/EmptyCheckName")
+	@ResponseBody
+	public String EmptyCheckName(String name) {
+		if(Ut.empty(name)) {
+			return "이름을 입력해주세요";
+		}
+		
+		return "";
+	}
+	
+	@RequestMapping("member/EmptyCheckNickname")
+	@ResponseBody
+	public String EmptyCheckNickname(String nickName) {
+		if(Ut.empty(nickName)) {
+			return "닉네임을 입력해주세요";
+		}
+		
+		return "";
+	}
+	
+	
+	@RequestMapping("member/EmptyChecktel")
+	@ResponseBody
+	public String EmptyChecktel(String cellphoneNo) {
+		if(Ut.empty(cellphoneNo)) {
+			return "전화번호을 입력해주세요";
+		}
+		
+		return "";
+	}
+	
+	@RequestMapping("member/EmptyCheckEmail")
+	@ResponseBody
+	public String EmptyCheckEmail(String email) {
+		if(Ut.empty(email)) {
+			return "이메일를 입력해주세요";
+		}
+		
+		return "";
+	}
 }
