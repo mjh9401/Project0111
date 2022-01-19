@@ -45,5 +45,24 @@ public class MemberServie {
 		return memberDao.getMemberByLoginId(loginId);
 	}
 
+	public Member findMember(String name, String email) {
+		
+		return memberDao.findMembmer(name,email);
+	}
+
+	public Member findMemberPw(String loginId, String email) {
+		
+		return memberDao.findMemberPw(loginId,email);
+	}
+
+	public void findMemberforDrop(String loginId, String password) {
+
+		memberDao.findMemberforDrop(loginId,password);
+	}
+
+	public void doMemberModify(int id,String password, String cellphoneNo, String email) {
+		memberDao.doMemberModify(id,password,cellphoneNo,email);
+	}
+
 
 }

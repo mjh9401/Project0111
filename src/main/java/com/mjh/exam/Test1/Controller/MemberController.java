@@ -141,4 +141,115 @@ public class MemberController {
 		
 		return "";
 	}
+	
+	@RequestMapping("member/findId")
+	public String showFindId() {
+		
+		return "usr/member/finedId";
+	}
+	
+	@RequestMapping("member/doFindId")
+	@ResponseBody
+	public String doFindId(String name, String email) {
+		
+		if(Ut.empty(name)) {
+			return Ut.jsHistoryBack("이름을 입력해주세요");
+		}
+		
+		if(Ut.empty(email)) {
+			return Ut.jsHistoryBack("이메일을 입력해주세요");
+		}
+		
+		Member oldmember= memberService.findMember(name,email);
+		
+		if(oldmember == null) {
+			return Ut.jsHistoryBack("해당 회원 존재하지 않습니다.");
+		}
+		
+		return Ut.jsReplace(Ut.f("%s님의 아이디는 %s입니다.",oldmember.getName(),oldmember.getLoginId()),"../member/login");
+	}
+	
+	@RequestMapping("member/findPw")
+	public String showFindPw() {
+		
+		return "usr/member/finedPw";
+	}
+	
+	@RequestMapping("member/dofidnPw")
+	@ResponseBody
+	public String doFindPw(String loginId, String email) {
+		
+		if(Ut.empty(loginId)) {
+			return Ut.jsHistoryBack("아이디를 입력해주세요");
+		}
+		
+		if(Ut.empty(email)) {
+			return Ut.jsHistoryBack("이메일을 입력해주세요");
+		}
+		
+		Member oldMember= memberService.findMemberPw(loginId,email);
+		
+		return Ut.jsReplace(Ut.f("%s님의 아이디는 %s입니다.",oldMember.getName(),oldMember.getLoginPw()),"../member/login");
+	}
+	
+	@RequestMapping("member/memberDrop")
+	public String showMemberDrop() {
+		
+		return "usr/member/memberDrop";
+	}
+	
+	@RequestMapping("member/doMemberDrop")
+	@ResponseBody
+	public String doFindPw(String loginId, String password, String passwordConfirm) {
+		
+		if(Ut.empty(loginId)) {
+			return Ut.jsHistoryBack("아이디를 입력해주세요");
+		}
+		
+		// 현재 로그인 아이디와 입력한 아이디가 일치하는 확인 로직
+		
+		if(!password.equals(passwordConfirm)) {
+			return Ut.jsHistoryBack("비번이 일치하지 않습니다.");
+		}
+		
+		memberService.findMemberforDrop(loginId,password);
+		
+		return Ut.jsReplace("회원탈퇴 완료됐습니다.","../member/login");
+	}
+	
+	@RequestMapping("member/memberModify")
+	public String showmemberModify() {
+		
+		return "usr/member/memberModify";
+	}
+	
+	@RequestMapping("member/doMemberModify")
+	@ResponseBody
+	public String doMemberModify(int id,String password, String passwordConfirm, String cellphoneNo, String email) {
+		
+		if(Ut.empty(password)) {
+			return Ut.jsHistoryBack("비밀번호를 입력해주세요");
+		}
+		
+		if(Ut.empty(passwordConfirm)) {
+			return Ut.jsHistoryBack("비밀번호 확인을 입력해주세요");
+		}
+		
+		if(!password.equals(passwordConfirm)) {
+			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+		
+		if(Ut.empty(cellphoneNo)) {
+			return Ut.jsHistoryBack("휴대전화번호을 입력해주세요");
+		}
+		
+		if(Ut.empty(email)) {
+			return Ut.jsHistoryBack("이메일을 입력해주세요");
+		}
+		
+		
+		memberService.doMemberModify(id,password,cellphoneNo,email);
+		
+		return Ut.jsReplace("회원정보 수정이 완료됐습니다..","../member/login");
+	}
 }

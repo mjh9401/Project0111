@@ -17,8 +17,8 @@
 						<label class="label"> <span class="label-text">Password</span></label>
 						<input name="loginPw" type="password" placeholder="password" class="input input-bordered">
 						<label class="label"> 
-							<a href="#" class="label-text-alt">Forgot password?</a> 
-							<a href="#" class="label-text-alt">Forgot ID?</a> 
+							<a href="../member/findId" class="label-text-alt">Forgot ID?</a> 
+							<a href="../member/findPw" class="label-text-alt">Forgot password?</a> 
 							<a href="/member/join" class="label-text-alt">Member Join?</a>
 						</label>
 					</div>

@@ -21,6 +21,18 @@
 		where loginId = #{loginId}
 	</select>
 	
+	<select id="findMembmer" resultType="Member">
+		select * from member
+		where name = #{name}
+		and email = #{email}
+	</select>
+	
+	<select id="findMemberPw" resultType="Member">
+		select * from member
+		where loginId = #{loginId}
+		and email = #{email}
+	</select>
+	
 	<insert id="doJoin">
 		INSERT INTO `member`
 		SET regDate = NOW(),
@@ -33,5 +45,29 @@
 		email = #{email}
 	</insert>
 	
+	<update id="findMemberforDrop">
+		UPDATE `member` 
+		SET delStatus = 1,
+		delDate = NOW()
+		WHERE loginId = #{loginId}
+		AND loginPw = #{password};
+	</update>
+	
+	<update id="doMemberModify">
+		update member
+		<set>
+			updateDate = now(),
+			<if test="password != null">
+				loginPw = #{password}
+			</if>
+			<if test="cellphoneNo != null">
+				cellphoneNo = #{cellphoneNo}
+			</if>
+			<if test="email != null">
+				email = #{email}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
 	
 </mapper>

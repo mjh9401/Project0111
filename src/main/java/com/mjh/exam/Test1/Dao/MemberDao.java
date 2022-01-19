@@ -19,4 +19,12 @@ public interface MemberDao {
 
 	Member getMemberByLoginId(@Param("loginId") String loginId);
 
+	Member findMembmer(@Param("name") String name,@Param("email") String email);
+
+	Member findMemberPw(@Param("loginId") String loginId,@Param("email") String email);
+
+	void findMemberforDrop(@Param("loginId") String loginId,@Param("password") String password);
+
+	void doMemberModify(@Param("id") int id,@Param("password") String password,@Param("cellphoneNo") String cellphoneNo,@Param("email") String email);
+
 }
