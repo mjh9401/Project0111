@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.mjh.exam.Test1.Dao.MemberDao;
 import com.mjh.exam.Test1.Dto.Member;
+import com.mjh.exam.Test1.Dto.Rq;
 
 @Service
-public class MemberServie {
+public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 
@@ -63,6 +64,18 @@ public class MemberServie {
 	public void doMemberModify(int id,String password, String cellphoneNo, String email) {
 		memberDao.doMemberModify(id,password,cellphoneNo,email);
 	}
+
+	public Member findMemberByLoginId(String loginId) {
+
+		return memberDao.findMemberByLoginId(loginId);
+	}
+
+	public Member getMemberByLoginId(int loginMemberId) {
+		
+		return memberDao.getMemberByLoginId(loginMemberId);
+	}
+
+	
 
 
 }

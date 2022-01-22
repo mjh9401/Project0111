@@ -6,14 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mjh.exam.Test1.Dto.Member;
-import com.mjh.exam.Test1.Service.MemberServie;
+import com.mjh.exam.Test1.Dto.Rq;
+import com.mjh.exam.Test1.Service.MemberService;
 import com.mjh.exam.Test1.Ut.Ut;
 
 
 @Controller
 public class MemberController {
 	@Autowired
-	private MemberServie memberService;
+	private MemberService memberService;
+	@Autowired
+	private Rq rq;
 	
 	@RequestMapping("member/login")
 	public String ShowLogin() {
@@ -251,5 +254,32 @@ public class MemberController {
 		memberService.doMemberModify(id,password,cellphoneNo,email);
 		
 		return Ut.jsReplace("회원정보 수정이 완료됐습니다..","../member/login");
+	}
+	
+	@RequestMapping("member/doLogin")
+	@ResponseBody
+	public String dologin(String loginId,String loginPw) {
+		
+		if(Ut.empty(loginId)) {
+			return Ut.jsHistoryBack("아이디를 입력해주세요");
+		}
+		
+		if(Ut.empty(loginPw)) {
+			return Ut.jsHistoryBack("비밀번호를 입력해주세요");
+		}
+		
+		Member member = memberService.findMemberByLoginId(loginId);
+		
+		if(member == null) {
+			return Ut.jsHistoryBack("존재하지 않는 회원입니다.");
+		}
+		
+		if(!member.getLoginPw().equals(loginPw)) {
+			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
+		}
+		
+		rq.login(member);
+		
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),"/main");
 	}
 }

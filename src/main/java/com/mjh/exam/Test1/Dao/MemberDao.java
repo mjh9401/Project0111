@@ -27,4 +27,8 @@ public interface MemberDao {
 
 	void doMemberModify(@Param("id") int id,@Param("password") String password,@Param("cellphoneNo") String cellphoneNo,@Param("email") String email);
 
+	Member findMemberByLoginId(@Param("loginId") String loginId);
+
+	Member getMemberByLoginId(@Param("loginMemberId") int loginMemberId);
+
 }
