@@ -13,34 +13,43 @@ import com.mjh.exam.Test1.Service.MemberService;
 import lombok.Getter;
 
 @Component
-@Scope(value="request",proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value="request",proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
-	private boolean islogined;
+	private boolean isLogined;
 	@Getter
-	private int loginMemberId;
+	private int loginedMemberId;
 	@Getter
 	private Member loginedMember;
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
-	private HttpSession session;
+	private HttpSession Session;
 	
-	public Rq(HttpServletRequest req,HttpServletResponse resp, MemberService memberService) {
+	
+	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
-		this.session = req.getSession();
+		this.Session = req.getSession();
 		
-		if(session.getAttribute("loginIdMember") != null) {
+		boolean islogined = false;
+		int loginedMemberId = 0;
+		Member loginedMember = null;
+		
+		if(Session.getAttribute("loginedMemberId") != null) {
 			islogined = true;
-			loginMemberId = (int) session.getAttribute("loginMemberId");
-			loginedMember = memberService.getMemberByLoginId(loginMemberId);
+			loginedMemberId = (int) Session.getAttribute("loginedMemberId");
+			loginedMember = memberService.getMemberByLoginedId(loginedMemberId);
 		}
+		
+		this.loginedMemberId = loginedMemberId;
+		this.isLogined = islogined;
+		this.loginedMember = loginedMember;
 		
 		this.req.setAttribute("rq", this);
 	}
 
 	public void login(Member member) {
-		session.setAttribute("loginedMember", member);
+		Session.setAttribute("loginedMemberId", member.getId());
 	}
 }

@@ -21,6 +21,11 @@
 		where loginId = #{loginId}
 	</select>
 	
+	<select id="getMemberByLoginedId" resultType="Member">
+		select * from member
+		where id = #{loginedMemberId}
+	</select>
+	
 	<select id="findMembmer" resultType="Member">
 		select * from member
 		where name = #{name}

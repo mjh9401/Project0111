@@ -45,6 +45,11 @@ public class MemberService {
 
 		return memberDao.getMemberByLoginId(loginId);
 	}
+	
+	public Member getMemberByLoginedId(int loginedMemberId) {
+
+		return memberDao.getMemberByLoginedId(loginedMemberId);
+	}
 
 	public Member findMember(String name, String email) {
 		
@@ -70,12 +75,8 @@ public class MemberService {
 		return memberDao.findMemberByLoginId(loginId);
 	}
 
-	public Member getMemberByLoginId(int loginMemberId) {
-		
-		return memberDao.getMemberByLoginId(loginMemberId);
-	}
 
-	
+
 
 
 }

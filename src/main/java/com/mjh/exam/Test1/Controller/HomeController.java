@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
+
 	
 	@RequestMapping()
 	public String ShowIndex() {
@@ -13,6 +14,7 @@ public class HomeController {
 	
 	@RequestMapping("/main")
 	public String ShowMain() {
+			
 		return "usr/home/main";
 	}
 	

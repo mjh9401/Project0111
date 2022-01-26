@@ -280,6 +280,7 @@ public class MemberController {
 		
 		rq.login(member);
 		
+		System.err.println("RQ 상태 : "+ rq.isLogined());
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),"/main");
 	}
 }
