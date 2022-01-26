@@ -52,4 +52,9 @@ public class Rq {
 	public void login(Member member) {
 		Session.setAttribute("loginedMemberId", member.getId());
 	}
+
+	public void logout() {
+		Session.invalidate();
+
+	}
 }

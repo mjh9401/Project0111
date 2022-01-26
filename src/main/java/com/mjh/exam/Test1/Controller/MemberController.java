@@ -17,12 +17,7 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
-	
-	@RequestMapping("member/login")
-	public String ShowLogin() {
-		return "usr/member/login";
-	}
-	
+		
 	@RequestMapping("member/join")
 	public String ShowJoin() {
 		return "usr/member/join";
@@ -256,6 +251,11 @@ public class MemberController {
 		return Ut.jsReplace("회원정보 수정이 완료됐습니다..","../member/login");
 	}
 	
+	@RequestMapping("member/login")
+	public String ShowLogin() {
+		return "usr/member/login";
+	}
+	
 	@RequestMapping("member/doLogin")
 	@ResponseBody
 	public String dologin(String loginId,String loginPw) {
@@ -277,10 +277,19 @@ public class MemberController {
 		if(!member.getLoginPw().equals(loginPw)) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
-		
+				
 		rq.login(member);
-		
-		System.err.println("RQ 상태 : "+ rq.isLogined());
+				
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickName()),"/main");
 	}
+	
+	@RequestMapping("member/logout")
+	@ResponseBody
+	public String doLogout() {
+		
+		rq.logout();
+
+		return Ut.jsReplace("로그아웃 됐습니다.", "/main");
+	}
+	
 }

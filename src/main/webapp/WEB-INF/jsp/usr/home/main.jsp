@@ -26,18 +26,20 @@
 		<div class="flex-none">
 			<div class="avatar">
 				<c:choose>
-					<c:when test="${rq.isLogined()==false}">
+					<c:when test="${!rq.isLogined()}">
 						<div class="rounded-full w-10 h-10 m-1">
-							<a href="/member/login"> <img src="https://www.kindpng.com/picc/m/130-1300217_user-icon-member-icon-png-transparent-png.png">
+							<a href="/member/login"> 
+								<img src="https://www.kindpng.com/picc/m/130-1300217_user-icon-member-icon-png-transparent-png.png">
 							</a>
 						</div>
 					</c:when>
-					<c:otherwise>
+					<c:when test="${rq.isLogined()}">
 						<div class="rounded-full w-10 h-10 m-1">
-							<a href="/member/logout"> <img src="https://www.kindpng.com/picc/m/130-1300217_user-icon-member-icon-png-transparent-png.png">
+							<a href="/member/logout"> 
+								<img src="https://www.kindpng.com/picc/m/130-1300217_user-icon-member-icon-png-transparent-png.png">
 							</a>
 						</div>
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 			</div>
 		</div>
