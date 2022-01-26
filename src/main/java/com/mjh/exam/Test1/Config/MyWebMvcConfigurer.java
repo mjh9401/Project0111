@@ -1,4 +1,4 @@
-package com.mjh.exam.Test1;
+package com.mjh.exam.Test1.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
