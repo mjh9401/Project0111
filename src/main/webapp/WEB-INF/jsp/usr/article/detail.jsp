@@ -24,7 +24,7 @@
           <tr>
             <th>내용</th>
             <td>
-              <p>${article.body}</p>
+              <p style="white-space: pre-line">${article.body}</p>
             </td>
           </tr>
         </tbody>

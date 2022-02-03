@@ -3,8 +3,8 @@
 <%@ include file = "../common/header.jspf" %>
 <section class="mt-5">
   <div class="container mx-auto px-3">
-   <form class="table-box-type-1" method="post" action="../article/doWrite">
-    <input type="hidden" name = "loginedMemberId" value= "${loginedMemberId}" />
+   <form class="table-box-type-1" method="get" action="../article/doModify">
+    <input type="text" name = "id" value= "${article.id}" />
       <table>
         <colgroup>
           <!-- <td>태그들의 width값 -->
@@ -14,28 +14,25 @@
           <tr>
             <th style="height:50px;">제목</th>
             <td>
-               <input required="required" name="title" class="w-96" type="text" placeholder="제목" />
+               ${article.title}
             </td>
           </tr>
           <tr>
-            <th>닉네임</th>
+            <th>작성일</th>
             <td>
-               <p>닉네임</p>
+               ${article.regDate}
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea required="required" name ="body" class="w-full" cols="200" rows="30"  placeholder="내용을 적어주세요"></textarea> 
+            	<textarea required="required" name ="body" class="w-full" cols="200" rows="25">${article.body}</textarea> 
             </td>
           </tr>
           <tr>
             <th>제출</th>
             <td>
               <input type="submit" value="수정" />
-              <button type="button">
-              	<a href="#">삭제</a>
-              </button>
             </td>
           </tr>
         </tbody>

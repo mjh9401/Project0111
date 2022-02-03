@@ -37,4 +37,8 @@ public class ArticleServcie {
 		
 		return article;
 	}
+
+	public void doModify(int id, String body) {
+		articleDao.doModify(id,body);
+	}
 }

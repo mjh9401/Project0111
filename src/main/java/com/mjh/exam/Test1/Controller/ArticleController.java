@@ -75,6 +75,34 @@ public class ArticleController {
 		}
 		
 		return Ut.jsReplace("해당 게시글은 삭제 됐습니다.","../article/list");
+	}
+	
+	@RequestMapping("article/modify")
+	public String showModify(Model model,int id) {
+		Article article = articleService.searchArticleByid(id);
 		
+		if(article == null) {
+			return Ut.jsReplace("해당 게시글이 존재하지 않습니다.", "../article/list");
+		}
+		
+		model.addAttribute("article", article);
+		
+		return "usr/article/modify";
+	}
+	
+	@RequestMapping("article/doModify")
+	@ResponseBody
+	public String doModify(int id, String body) {
+		if(Ut.empty(id)) {
+			return Ut.jsReplace("해당게시물은 존재하지 않습니다.", "../article/list");
+		}
+		if(Ut.empty(body)) {
+			return Ut.jsReplace("해당게시물은 존재하지 않습니다.", "../article/list");
+		}
+		
+		articleService.doModify(id,body);
+		
+		
+		return Ut.jsReplace("게시물 수정 됐습니다.", "../article/list");
 	}
 }

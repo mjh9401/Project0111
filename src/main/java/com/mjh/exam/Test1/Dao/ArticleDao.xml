@@ -27,7 +27,15 @@
 	
 	<delete id="doDelete">
 		delete from article 
-		where id = ${id}
+		where id = #{id}
 	</delete>
+	
+	<update id="doModify">
+		update article 
+		<set>
+			body = #{body}
+		</set>
+		where id = #{id}
+	</update>
 	
 </mapper>

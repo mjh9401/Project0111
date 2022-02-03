@@ -26,14 +26,14 @@
           <tr>
             <th>내용</th>
             <td>
-              <textarea required="required" name ="body" class="w-full" cols="200" rows="25"  placeholder="내용을 적어주세요"></textarea> 
+              <textarea required="required" name ="body" class="w-full" cols="200" rows="25"  placeholder="내용을 적어주세요" ></textarea> 
             </td>
           </tr>
           <tr>
             <th>제출</th>
             <td>
-              <input type="submit" value="제출" />
-              <button type="button" onclick="history.back();">뒤로가기</button>
+              <input class="btn btn-primary" type="submit" value="제출" />
+              <button class="btn btn-primary" type="button" onclick="history.back();">뒤로가기</button>
             </td>
           </tr>
         </tbody>

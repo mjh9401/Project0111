@@ -19,4 +19,6 @@ public interface ArticleDao {
 
 	void doDelete(@Param("id") int id);
 
+	void doModify(@Param("id") int id, @Param("body") String body);
+
 }
