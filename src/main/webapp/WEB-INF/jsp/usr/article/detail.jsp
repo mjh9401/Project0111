@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../common/header.jspf" %>
 <section class="mt-5">
-  <div class="container mx-auto px-3">
-   <form class="table-box-type-1" method="post" action="../article/doWrite">
-    <input type="hidden" name = "loginedMemberId" value= "${loginedMemberId}" />
-      <table>
+  <div class="container mx-auto px-3"> 
+      <table class="table w-full">
         <colgroup>
           <!-- <td>태그들의 width값 -->
           <col width="200"/>
@@ -14,24 +12,25 @@
           <tr>
             <th style="height:50px;">제목</th>
             <td>
-               <input required="required" name="title" class="w-96" type="text" placeholder="제목" />
+               <p>${article.id}</p>
             </td>
           </tr>
           <tr>
-            <th>닉네임</th>
+            <th>제목</th>
             <td>
-               <p>닉네임</p>
+               <p>${article.title}</p>
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              내용
+              <p>${article.body}</p>
             </td>
           </tr>
         </tbody>
       </table>
-     </form>
+      <button class="btn btn-primary"><a href="../article/modify?id=${article.id}">글 수정</a></button>    
+      <button class="btn btn-primary"><a href="../article/delete?id=${article.id}">글 삭제</a></button>    
   </div>
 </section>               
 <%@ include file = "../common/footer.jspf"%>

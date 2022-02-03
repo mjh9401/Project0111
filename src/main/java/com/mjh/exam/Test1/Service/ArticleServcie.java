@@ -25,4 +25,16 @@ public class ArticleServcie {
 		
 		return articleDao.list();
 	}
+
+	public Article searchArticleByid(int id) {
+		
+		return articleDao.searchArticleByid(id);
+	}
+
+	public Article doDelete(int id) {
+		articleDao.doDelete(id);
+		Article article = articleDao.searchArticleByid(id);
+		
+		return article;
+	}
 }

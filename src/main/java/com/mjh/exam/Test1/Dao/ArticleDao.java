@@ -15,4 +15,8 @@ public interface ArticleDao {
 
 	ArrayList<Article> list();
 
+	Article searchArticleByid(@Param("id") int id);
+
+	void doDelete(@Param("id") int id);
+
 }

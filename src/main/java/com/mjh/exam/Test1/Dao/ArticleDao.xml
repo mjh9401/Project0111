@@ -20,5 +20,14 @@
 		order by id desc;
 	</select>
 	
+	<select id="searchArticleByid" resultType="Article">
+		select * from article
+		where id = #{id}
+	</select>
+	
+	<delete id="doDelete">
+		delete from article 
+		where id = ${id}
+	</delete>
 	
 </mapper>
