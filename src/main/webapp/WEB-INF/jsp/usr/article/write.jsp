@@ -20,13 +20,13 @@
           <tr>
             <th>닉네임</th>
             <td>
-               <p>닉네임</p>
+               <p>${rq.loginedMember.nickName}</p>
             </td>
           </tr>
           <tr>
             <th>내용</th>
             <td>
-              <textarea required="required" name ="body" class="w-full" cols="200" rows="30"  placeholder="내용을 적어주세요"></textarea> 
+              <textarea required="required" name ="body" class="w-full" cols="200" rows="25"  placeholder="내용을 적어주세요"></textarea> 
             </td>
           </tr>
           <tr>

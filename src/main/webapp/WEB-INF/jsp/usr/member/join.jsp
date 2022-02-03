@@ -9,7 +9,7 @@ body {
 	max-width: 760px;
 	min-width: 460px;
 	margin: 0 auto;
-	padding-top: 60px;
+	padding-top: 20px;
 }
 
 .cotain {
@@ -314,4 +314,5 @@ body {
 	}
 </script>
 
-<%@ include file="../common/footer.jspf"%>
+</body>
+</html>

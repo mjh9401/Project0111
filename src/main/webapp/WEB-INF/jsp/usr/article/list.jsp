@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "../common/header.jspf" %>
 <div class="overflow-x-auto">
-        <table class="table table-fixed w-full">
+        <table class="table w-full">
           <colgroup>
           	<col width="20">
-          	<col width="120">          	
-          	<col width="20">          	         	
+          	<col width="200">          	
+          	<col width="10">          	         	
           	<col width="10">          	         	
           </colgroup>
           <thead>
@@ -18,54 +18,14 @@
             </tr>
           </thead> 
           <tbody>
-            <tr>
-              <th>1</th> 
-              <td>Cy Ganderton</td> 
-              <td>Quality Control Specialist</td> 
-              <td>Blue</td>
-            </tr>
-            <tr>
-              <th>2</th> 
-              <td>Hart Hagerty</td> 
-              <td>Desktop Support Technician</td> 
-              <td>Purple</td>
-            </tr>
-            <tr>
-              <th>3</th> 
-              <td>Brice Swyre</td> 
-              <td>Tax Accountant</td> 
-              <td>Red</td>
-            </tr>
-            <tr>
-              <th>4</th> 
-              <td>Marjy Ferencz</td> 
-              <td>Office Assistant I</td> 
-              <td>Crimson</td>
-            </tr>
-            <tr>
-                <th>5</th> 
-                <td>Marjy Ferencz</td> 
-                <td>Office Assistant I</td> 
-                <td>Crimson</td>
-            </tr>
-              <tr>
-                <th>6</th> 
-                <td>Marjy Ferencz</td> 
-                <td>Office Assistant I</td> 
-                <td>Crimson</td>
-            </tr>
-            <tr>
-                <th>7</th> 
-                <td>Marjy Ferencz</td> 
-                <td>Office Assistant I</td> 
-                <td>Crimson</td>
-            </tr>
-            <tr>
-                <th>8</th> 
-                <td>Marjy Ferencz</td> 
-                <td>Office Assistant I</td> 
-                <td>Crimson</td>
-            </tr>
+           	<c:forEach var="article" items="${articles}">
+           		<tr>
+           			<td>${article.id}</td>
+           			<td><a href="../article/detail?id=${article.id}">${article.title}</a></td>
+           			<td>${article.title}</td>
+           			<td>${article.regDate}</td>
+           		</tr>
+           	</c:forEach>
           </tbody>
         </table>
 		<a href="../article/write">
