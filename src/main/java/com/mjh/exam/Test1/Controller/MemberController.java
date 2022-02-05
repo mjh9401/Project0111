@@ -50,6 +50,8 @@ public class MemberController {
 			return Ut.jsHistoryBack("이메일을 입력해주세요");
 		}
 		
+		loginPw = Ut.sha256(loginPw);
+		
 		int id = memberService.dojoin(loginId,loginPw,name,nickName,cellphoneNo,email);
 		
 		if(id == -1) {
@@ -274,7 +276,7 @@ public class MemberController {
 			return Ut.jsHistoryBack("존재하지 않는 회원입니다.");
 		}
 		
-		if(!member.getLoginPw().equals(loginPw)) {
+		if(!member.getLoginPw().equals(Ut.sha256(loginPw))) {
 			return Ut.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
 				
