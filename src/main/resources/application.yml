@@ -5,6 +5,17 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+ mail:
+    host: smtp.gmail.com
+    port: 587
+    username: answngus9401@gmail.com
+    password: noswghysintrjmqx 
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true          
  datasource:    
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/site?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
@@ -12,3 +23,11 @@ spring:
     password: mjh9401
 mybatis:
   type-aliases-package: com.mjh.exam.Test1.Dto
+custom:
+  logging:
+    dir: log
+    level: debug
+  siteMainUri: http://localhost:8011/
+  siteName: 인스타
+  emailFrom: no-reply@localhost
+  emailFromName: 인스타알림봇 

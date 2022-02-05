@@ -31,4 +31,7 @@ public interface MemberDao {
 
 	Member getMemberByLoginedId(@Param("loginedMemberId") int loginedMemberId);
 
+	void remodify(@Param("id") int id,@Param("pw") String tempPassword,@Param("name") String name,
+			@Param("nickName") String nickName,@Param("cellPhonNo") String cellPhonNo,@Param("email") String email);
+
 }

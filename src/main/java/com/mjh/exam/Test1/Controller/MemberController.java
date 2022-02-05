@@ -189,7 +189,17 @@ public class MemberController {
 		
 		Member oldMember= memberService.findMemberPw(loginId,email);
 		
-		return Ut.jsReplace(Ut.f("%s님의 아이디는 %s입니다.",oldMember.getName(),oldMember.getLoginPw()),"../member/login");
+		if(oldMember == null) {
+			return Ut.jsHistoryBack("해당 회원은 존재하지 않습니다.");
+		}
+		
+		if(oldMember.getLoginId().equals(loginId) == false) {
+			return Ut.jsHistoryBack("해당 회원은 존재하지 않습니다.");
+		}
+		
+		memberService.notifyTempLoginPwByEmail(oldMember);
+		
+		return Ut.jsReplace(Ut.f("%s님 해당 이메일로 임시 비밀번호 발송됐습니다.",oldMember.getName()),"../member/login");
 	}
 	
 	@RequestMapping("member/memberDrop")

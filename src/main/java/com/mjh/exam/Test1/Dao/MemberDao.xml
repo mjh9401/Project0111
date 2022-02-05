@@ -85,4 +85,35 @@
 		where id = #{id}
 	</update>
 	
+	<update id="remodify">
+		update member
+		<set>
+			<choose>
+				<when test="pw != null">
+					loginPw = #{pw}
+				</when>
+				<when test="name != null">
+					name = #{name}	
+				</when>
+				<when test="nickname != null">
+					nickName = #{nickName}	
+				</when>
+				<when test="cellphonNo != null">
+					cellphoneNo = #{cellPhonNo}
+				</when>
+				<when test="email != null">
+					email = #{email}
+				</when>
+				<otherwise>
+					loginPw = #{pw},
+					name = #{name},
+					nickName = #{nickName},
+					cellphoneNo = #{cellPhonNo},
+					email = #{email}
+				</otherwise>
+			</choose>
+		</set>
+		where id = #{id}
+	</update>
+	
 </mapper>
