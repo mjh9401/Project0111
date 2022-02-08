@@ -20,11 +20,25 @@ public class ArticleController {
 	
 	
 	@RequestMapping("article/list")
-	public String showList(Model model, int boardId,@RequestParam(defaultValue = "") String searchKeyword) {
-		ArrayList<Article> articles= articleService.list(boardId,searchKeyword);
+	public String showList(Model model, int boardId,@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "") String searchKeyword) {
+		// 해당 게시글 총 갯수
+		int articlesCount = articleService.getArticlesCount(boardId,searchKeyword);
+		// 한 페이지에 게시글 갯수
+		int itemsCountInAPage = 10;
+		// 전체 페이지 수 = (해당 게시글 총 갯수 / 한 페이지에 게시글 갯수)
+		int pageCount = (int) Math.ceil((double)articlesCount/itemsCountInAPage);
+		
+		// 해당 게시글 전체 가져오기
+		ArrayList<Article> articles= articleService.list(boardId,searchKeyword,page,itemsCountInAPage);
 		
 		model.addAttribute("articles", articles);
 		model.addAttribute("boardId", boardId);
+		model.addAttribute("articlesCount", articlesCount);
+		model.addAttribute("itemsCountInAPage", itemsCountInAPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("page", page);
+		model.addAttribute("searchKeyword", searchKeyword);
 		
 		return "usr/article/list";
 	}

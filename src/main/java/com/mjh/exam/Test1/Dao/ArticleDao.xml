@@ -25,7 +25,10 @@
 		<if test="searchKeyword != ''">
 			and title like concat('%',#{searchKeyword},'%')
 		</if>
-		order by id desc;
+		order by id desc
+		<if test="limitTake != -1">
+			limit #{limitStart}, #{limitTake} 
+		</if>
 	</select>
 	
 	<select id="searchArticleByid" resultType="Article">
@@ -36,6 +39,12 @@
 	<select id="searchBoardIdById" resultType="Int">
 		select boardId from article
 		where id = #{id}
+	</select>
+	
+	<select id="getArticlesCount" resultType="int">
+		select count(*) from article
+		where boardId = #{boardId}
+		and title like concat('%',#{searchKeyword},'%')
 	</select>
 	
 	<delete id="doDelete">

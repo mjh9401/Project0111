@@ -13,7 +13,8 @@ public interface ArticleDao {
 
 	Article checkArticle(@Param("title") String title,@Param("body") String body,@Param("boardId") int boardId);
 
-	ArrayList<Article> list(@Param("boardId") int boardId,@Param("searchKeyword") String searchKeyword);
+	ArrayList<Article> list(@Param("boardId") int boardId,@Param("searchKeyword") String searchKeyword,
+			@Param("limitStart") int limitStart,@Param("limitTake") int limitTake);
 
 	Article searchArticleByid(@Param("id") int id);
 
@@ -22,5 +23,7 @@ public interface ArticleDao {
 	void doModify(@Param("id") int id, @Param("body") String body);
 
 	int searchBoardIdById(@Param("id") int id);
+
+	int getArticlesCount(@Param("boardId") int boardId,@Param("searchKeyword") String searchKeyword);
 
 }

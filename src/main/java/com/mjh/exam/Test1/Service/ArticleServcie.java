@@ -21,9 +21,11 @@ public class ArticleServcie {
 		return articleDao.checkArticle(title,body,boardId);
 	}
 
-	public ArrayList<Article> list(int boardId, String searchKeyword) {
+	public ArrayList<Article> list(int boardId, String searchKeyword, int page, int itemsCountInAPage) {
+		int limitStart = (page-1)*itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
 		
-		return articleDao.list(boardId,searchKeyword);
+		return articleDao.list(boardId,searchKeyword,limitStart,limitTake);
 	}
 
 	public Article searchArticleByid(int id) {
@@ -44,5 +46,9 @@ public class ArticleServcie {
 
 	public int searchBoardIdById(int id) {
 		return articleDao.searchBoardIdById(id);
+	}
+
+	public int getArticlesCount(int boardId, String searchKeyword) {
+		return articleDao.getArticlesCount(boardId,searchKeyword);
 	}
 }

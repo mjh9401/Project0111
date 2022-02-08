@@ -48,13 +48,23 @@
 
         <div class="flex justify-center mt-2 mb-2" style="position: absolute; bottom: 5%; left: 50%; transform:translate(-50%,-50%);">
             <div class="btn-group">
-                <button class="btn">Previous</button> 
-                <button class="btn">1</button> 
-                <button class="btn btn-active">2</button> 
-                <button class="btn">3</button> 
-                <button class="btn">4</button> 
-                <button class="btn">Next</button>
+             <c:set var="pageMenuArmLen" value="4"/>
+             <c:set var="startpage" value="${page - pageMenuArmLen >= 1 ? page- pageMenuArmLen : 1}"/>
+             <c:set var="endPage" value="${page + pageMenuArmLen <= pageCount ? page + pageMenuArmLen : pageCount}"/>
+             
+             <c:set var="pageBaseUri" value="?boardId=${boardId}"/>
+             <c:set var="pageBaseUri" value="${pageBaseUri}&searchKeyword=${searchKeyword}"/>
+             
+                <button class="btn"><a href="${pageBaseUri}&page=1">Previous</a></button>
+                 
+               	<c:forEach begin="${startpage}" end="${endPage}" var = "i">
+               		<a class="btn ${page == i ? 'btn-active' : ''}" href="${pageBaseUri}&page=${i}">${i}</a>
+               	</c:forEach> 
+               	
+                <button class="btn"><a href="${pageBaseUri}&page=${pageCount}">Next</a></button>
+                              
             </div>
         </div>
-    </div>                
+        
+    </div>               
 <%@ include file = "../common/footer.jspf"%>
