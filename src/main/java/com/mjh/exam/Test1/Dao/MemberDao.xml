@@ -42,12 +42,7 @@
 		select * from member
 		where loginId = #{loginId}
 	</select>
-	
-	<select id="">
-		select * from member
-		where id = #{loginMemberId}
-	</select>
-	
+		
 	<insert id="doJoin">
 		INSERT INTO `member`
 		SET regDate = NOW(),

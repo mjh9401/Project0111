@@ -5,6 +5,7 @@
 		insert into article
 		set regDate = now(),
 		updateDate = now(),
+		boardId = #{boardId},
 		title = #{title},
 		body = #{body}
 	</insert>
@@ -13,15 +14,22 @@
 		select * from article
 		where title = #{title}
 		and body = #{body}
+		and boardId = #{boardId}
 	</select>
 	
 	<select id="list" resultType="Article">
 		select * from article
+		where boardId = #{boardId}
 		order by id desc;
 	</select>
 	
 	<select id="searchArticleByid" resultType="Article">
 		select * from article
+		where id = #{id}
+	</select>
+	
+	<select id="searchBoardIdById" resultType="Int">
+		select boardId from article
 		where id = #{id}
 	</select>
 	

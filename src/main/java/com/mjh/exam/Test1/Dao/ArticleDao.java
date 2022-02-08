@@ -9,16 +9,18 @@ import com.mjh.exam.Test1.Dto.Article;
 
 @Mapper
 public interface ArticleDao {
-	void doWrite(@Param("title") String title,@Param("body") String body);
+	void doWrite(@Param("title") String title,@Param("body") String body,@Param("boardId") int boardId);
 
-	Article checkArticle(@Param("title") String title,@Param("body") String body);
+	Article checkArticle(@Param("title") String title,@Param("body") String body,@Param("boardId") int boardId);
 
-	ArrayList<Article> list();
+	ArrayList<Article> list(@Param("boardId") int boardId);
 
 	Article searchArticleByid(@Param("id") int id);
 
 	void doDelete(@Param("id") int id);
 
 	void doModify(@Param("id") int id, @Param("body") String body);
+
+	int searchBoardIdById(@Param("id") int id);
 
 }

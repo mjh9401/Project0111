@@ -13,17 +13,17 @@ public class ArticleServcie {
 	@Autowired
 	private ArticleDao articleDao;
 
-	public void doWrtie(String title, String body) {
-		articleDao.doWrite(title,body);
+	public void doWrtie(String title, String body, int boardId) {
+		articleDao.doWrite(title,body,boardId);
 	}
 
-	public Article checkArticle(String title, String body) {
-		return articleDao.checkArticle(title,body);
+	public Article checkArticle(String title, String body, int boardId) {
+		return articleDao.checkArticle(title,body,boardId);
 	}
 
-	public ArrayList<Article> list() {
+	public ArrayList<Article> list(int boardId) {
 		
-		return articleDao.list();
+		return articleDao.list(boardId);
 	}
 
 	public Article searchArticleByid(int id) {
@@ -40,5 +40,9 @@ public class ArticleServcie {
 
 	public void doModify(int id, String body) {
 		articleDao.doModify(id,body);
+	}
+
+	public int searchBoardIdById(int id) {
+		return articleDao.searchBoardIdById(id);
 	}
 }

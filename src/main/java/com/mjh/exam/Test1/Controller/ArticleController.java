@@ -18,22 +18,25 @@ public class ArticleController {
 	private ArticleServcie articleService;
 	
 	@RequestMapping("article/list")
-	public String showList(Model model) {
-		ArrayList<Article> articles= articleService.list();
+	public String showList(Model model, int boardId) {
+		ArrayList<Article> articles= articleService.list(boardId);
 		
 		model.addAttribute("articles", articles);
+		model.addAttribute("boardId", boardId);
 		
 		return "usr/article/list";
 	}
 	
 	@RequestMapping("article/write")
-	public String showWrite() {
+	public String showWrite(Model model,int boardId) {
+		model.addAttribute("boardId", boardId);
+		
 		return "usr/article/write";
 	}
 	
 	@RequestMapping("article/doWrite")
 	@ResponseBody
-	public String doWrite(String title,String body) {
+	public String doWrite(String title,String body,int boardId) {
 		if(Ut.empty(title)) {
 			return "제목을 입력해주세요";
 		}
@@ -42,14 +45,14 @@ public class ArticleController {
 			return "내용을 입력해주세요";
 		}
 		
-		articleService.doWrtie(title,body);
-		Article article = articleService.checkArticle(title,body);
+		articleService.doWrtie(title,body,boardId);
+		Article article = articleService.checkArticle(title,body,boardId);
 		
 		if(article == null) {
 			return "게시글 작성이 되지 않았습니다.";
 		}
 			
-		return Ut.jsReplace("게시글 작성이 완료됐습니다.", "../article/list");
+		return Ut.jsReplace("게시글 작성이 완료됐습니다.", "../article/list?boardId="+boardId);
 	}
 	
 	@RequestMapping("article/detail")
@@ -58,7 +61,7 @@ public class ArticleController {
 		Article article = articleService.searchArticleByid(id);
 		
 		if(article == null) {
-			return "해당 게시글은 존재하지 않습니다.";
+			return Ut.jsHistoryBack("해당 게시글은 존재하지 않습니다.");
 		}
 		model.addAttribute("article", article);
 		
@@ -68,21 +71,23 @@ public class ArticleController {
 	@RequestMapping("article/delete")
 	@ResponseBody
 	public String doDelete(int id) {
+		int boardId = articleService.searchBoardIdById(id);		
 		Article article = articleService.doDelete(id);
 		
 		if(article != null) {
 			return Ut.jsHistoryBack("해당 게시글이 삭제되지 않았습니다.");
 		}
-		
-		return Ut.jsReplace("해당 게시글은 삭제 됐습니다.","../article/list");
+			
+		return Ut.jsReplace("해당 게시글은 삭제 됐습니다.","../article/list?boardId="+boardId);
 	}
 	
 	@RequestMapping("article/modify")
 	public String showModify(Model model,int id) {
+		int boardId = articleService.searchBoardIdById(id);
 		Article article = articleService.searchArticleByid(id);
-		
+
 		if(article == null) {
-			return Ut.jsReplace("해당 게시글이 존재하지 않습니다.", "../article/list");
+			return Ut.jsReplace("해당 게시글이 존재하지 않습니다.", "../article/list?boardId="+boardId);
 		}
 		
 		model.addAttribute("article", article);
@@ -93,16 +98,17 @@ public class ArticleController {
 	@RequestMapping("article/doModify")
 	@ResponseBody
 	public String doModify(int id, String body) {
+		int boardId = articleService.searchBoardIdById(id);
+		
 		if(Ut.empty(id)) {
-			return Ut.jsReplace("해당게시물은 존재하지 않습니다.", "../article/list");
+			return Ut.jsReplace("해당게시물은 존재하지 않습니다.", "../article/list?boardId="+boardId);
 		}
 		if(Ut.empty(body)) {
-			return Ut.jsReplace("해당게시물은 존재하지 않습니다.", "../article/list");
+			return Ut.jsReplace("해당게시물은 존재하지 않습니다.", "../article/list?boardId="+boardId);
 		}
 		
 		articleService.doModify(id,body);
-		
-		
-		return Ut.jsReplace("게시물 수정 됐습니다.", "../article/list");
+	
+		return Ut.jsReplace("게시물 수정 됐습니다.", "../article/list?boardId="+boardId);
 	}
 }

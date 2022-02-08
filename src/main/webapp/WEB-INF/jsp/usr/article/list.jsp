@@ -28,7 +28,8 @@
            	</c:forEach>
           </tbody>
         </table>
-		<a href="../article/write">
+		<a href="../article/write?boardId=${boardId}">
+			<input type="hidden" name = "boardId" value= "${boardId}" />
 			<button class="btn btn-primary" style="position: absolute; bottom: 18%; right: 0;">
 				글 작성
 			</button> 

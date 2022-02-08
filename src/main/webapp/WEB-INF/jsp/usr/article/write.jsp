@@ -4,7 +4,7 @@
 <section class="mt-5">
   <div class="container mx-auto px-3">
    <form class="table-box-type-1" method="post" action="../article/doWrite">
-    <input type="hidden" name = "loginedMemberId" value= "${loginedMemberId}" />
+    <input type="hidden" name = "boardId" value= "${boardId}" />
       <table>
         <colgroup>
           <!-- <td>태그들의 width값 -->
