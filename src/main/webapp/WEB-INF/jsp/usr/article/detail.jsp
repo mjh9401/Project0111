@@ -29,8 +29,44 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-primary"><a href="../article/modify?id=${article.id}">글 수정</a></button>    
-      <button class="btn btn-primary"><a href="../article/delete?id=${article.id}">글 삭제</a></button>    
+      <div style="padding-left: 80%">
+	      <button class="btn btn-primary"><a href="../article/modify?id=${article.id}">글 수정</a></button>    
+	      <button class="btn btn-primary"><a href="../article/delete?id=${article.id}">글 삭제</a></button>    
+      </div>
+  </div>
+</section>
+
+<!-- 댓글 -->
+<section class="mt-5">
+  <div class="container mx-auto px-3">
+	  <table class="table w-full">
+	  		<colgroup>
+	          <!-- <td>태그들의 width값 -->
+	          <col width="20"/>
+	          <col width="20"/>
+	        </colgroup>
+	  		<tbody>
+	  		<tr>
+		  		<form action="../reply/doWrite" method="get">
+		  			<input type="hidden" name="articldeId" value="${article.id}" />
+					<th>테스트1</th>
+		  			<td>
+		  				<textarea name="body" cols="100" rows="1" placeholder="댓글을 입력해주세요"></textarea>
+		  			</td>
+		  			<td>
+		  				<input class="btn btn-primary" type="submit" />
+		  			</td>
+		  		</form>
+	  		</tr>
+
+	  		<c:forEach var="reply" items="${replies}">
+	  			<tr>
+	  				<td>이름</td>
+	  				<td>${reply.body}</td>
+	  			</tr>
+	  		</c:forEach>
+	  		</tbody>
+	  </table>
   </div>
 </section>               
 <%@ include file = "../common/footer.jspf"%>

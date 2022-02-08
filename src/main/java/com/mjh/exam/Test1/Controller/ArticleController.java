@@ -20,7 +20,7 @@ public class ArticleController {
 	
 	
 	@RequestMapping("article/list")
-	public String showList(Model model, int boardId,@RequestParam(defaultValue = "0") int page,
+	public String showList(Model model, int boardId,@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "") String searchKeyword) {
 		// 해당 게시글 총 갯수
 		int articlesCount = articleService.getArticlesCount(boardId,searchKeyword);
