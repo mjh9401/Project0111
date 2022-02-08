@@ -13,7 +13,7 @@ public interface ArticleDao {
 
 	Article checkArticle(@Param("title") String title,@Param("body") String body,@Param("boardId") int boardId);
 
-	ArrayList<Article> list(@Param("boardId") int boardId);
+	ArrayList<Article> list(@Param("boardId") int boardId,@Param("searchKeyword") String searchKeyword);
 
 	Article searchArticleByid(@Param("id") int id);
 

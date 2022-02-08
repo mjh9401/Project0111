@@ -34,12 +34,18 @@
 				글 작성
 			</button> 
 		</a>
-        <div class="form-control w-80" style="position: absolute; bottom: 12%; left: 50%; transform:translate(-50%,-50%);"> 
-  			<div class="relative">
-    			<input type="text" placeholder="Search" class="w-full pr-16 input input-primary input-bordered"> 
-    			<button class="absolute top-0 right-0 rounded-l-none btn btn-primary">검색</button>
-  			</div>
-		</div> 
+		
+		<!-- 게시물 검색  -->
+		<form>
+			<input type="hidden" name="boardId" value="${boardId}" />
+			<div class="form-control w-80" style="position: absolute; bottom: 12%; left: 50%; transform:translate(-50%,-50%);"> 
+	  			<div class="relative">
+	    			<input name = "searchKeyword" type="text" placeholder="Search" class="w-full pr-16 input input-primary input-bordered"> 
+	    			<button type="submit" class="absolute top-0 right-0 rounded-l-none btn btn-primary">검색</button>
+	  			</div>
+			</div> 
+		</form>
+
         <div class="flex justify-center mt-2 mb-2" style="position: absolute; bottom: 5%; left: 50%; transform:translate(-50%,-50%);">
             <div class="btn-group">
                 <button class="btn">Previous</button> 

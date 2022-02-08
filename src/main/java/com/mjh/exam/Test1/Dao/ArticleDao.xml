@@ -19,7 +19,12 @@
 	
 	<select id="list" resultType="Article">
 		select * from article
-		where boardId = #{boardId}
+		<if test="boardId != 0">
+			where boardId = #{boardId}
+		</if>
+		<if test="searchKeyword != ''">
+			and title like concat('%',#{searchKeyword},'%')
+		</if>
 		order by id desc;
 	</select>
 	

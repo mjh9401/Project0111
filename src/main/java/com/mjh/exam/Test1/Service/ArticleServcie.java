@@ -21,9 +21,9 @@ public class ArticleServcie {
 		return articleDao.checkArticle(title,body,boardId);
 	}
 
-	public ArrayList<Article> list(int boardId) {
+	public ArrayList<Article> list(int boardId, String searchKeyword) {
 		
-		return articleDao.list(boardId);
+		return articleDao.list(boardId,searchKeyword);
 	}
 
 	public Article searchArticleByid(int id) {
