@@ -12,19 +12,18 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import com.mjh.exam.Test1.Dto.Rq;
 
 @Component
-public class NeedLoginInterceptor implements HandlerInterceptor {
+public class NeedLogOutInterceptor implements HandlerInterceptor {
 	@Autowired
 	private Rq rq;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		if(!rq.isLogined()) {
+		if(rq.isLogined()) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인을 해주세요');"
-					+ "location.href='../member/login';"
+			out.println("<script>alert('로그아웃 해주세요');"
+					+ "location.href='/main';"
 					+ "</script>");
 			out.flush();
 			out.close();
