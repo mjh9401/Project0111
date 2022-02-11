@@ -38,9 +38,10 @@
 						</c:when>
 						<c:when test="${rq.isLogined()}">
 							<div class="rounded-full w-10 h-10 m-1">
-								<a href="/member/logout"> <img src="https://www.kindpng.com/picc/m/130-1300217_user-icon-member-icon-png-transparent-png.png">
+								<a href="../member/Mypage"> <img src="https://www.kindpng.com/picc/m/130-1300217_user-icon-member-icon-png-transparent-png.png">
 								</a>
 							</div>
+							<button class="btn btn-ghost"><a href="/member/logout">로그아웃</a></button> 														
 						</c:when>
 					</c:choose>
 				</div>

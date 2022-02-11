@@ -5,12 +5,13 @@
 	<form action="../member/doMemberModify" method="post">
 		<div class="cotain">
 			<!-- value값 로그인 된 회원 번호  -->
-			<input name = "id" type="hidden" value="1"/>
+			<input name = "id" type="hidden" value="${rq.getLoginedMemberId()}"/>
 			<div class="UserId">
-				<h3>아이디</h3>
-				<div class="inputId">로그안아이디 자리</div>
+				<h3 class="mb-2">아이디</h3>
+				<span style="font-size: 26px;">${rq.getLoginedMember().getLoginId()}</span>
 			</div>
 			<div class="password">
+				<h3>비밀번호</h3>
 				<div class="inputId">
 					<input name="password" type="password">
 				</div>
@@ -21,26 +22,22 @@
 					<input name="passwordConfirm" type="password">
 				</div>
 			</div>
-			<div class="name">
-				<h3>이름</h3>
-				<div class="inputId">이름 자리</div>
-			</div>
 			<div class="nickName">
 				<h3>닉네임</h3>
 				<div class="inputId">
-					<input name="nickName" type="text" >
+					<input name="nickName" type="text"  value="${rq.getLoginedMember().getNickName()}">
 				</div>										
 			</div>
 			<div class="phoneNumeber">
 				<h3>휴대전화</h3>
 				<div class="inputId">
-					<input name = "cellphoneNo" type="tel">
+					<input name = "cellphoneNo" type="tel" value="${rq.getLoginedMember().getCellphoneNo()}">
 				</div>
 			</div>
 			<div class="email">
 				<h3>이메일</h3>
 				<div class="inputId">
-					<input name="email" type="email">
+					<input name="email" type="email" value="${rq.getLoginedMember().getEmail()}">
 				</div>
 			</div>
 		</div>
@@ -172,4 +169,5 @@ body {
 	font-weight: bold;
 }
 </style>
-<%@ include file="../common/footer.jspf"%>
+</body>
+</html>

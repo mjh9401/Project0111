@@ -68,10 +68,10 @@
 		<set>
 			updateDate = now(),
 			<if test="password != null">
-				loginPw = #{password}
+				loginPw = #{password},
 			</if>
 			<if test="cellphoneNo != null">
-				cellphoneNo = #{cellphoneNo}
+				cellphoneNo = #{cellphoneNo},
 			</if>
 			<if test="email != null">
 				email = #{email}

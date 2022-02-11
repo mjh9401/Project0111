@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jspf"%>
 <div class="overflow-x-auto">
-	<table class="table w-full">
+	<table class="table w-full mt-5">
 		<colgroup>
 			<col width="20">
 			<col width="200">

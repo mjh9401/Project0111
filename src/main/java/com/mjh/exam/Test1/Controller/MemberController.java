@@ -17,9 +17,15 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
-		
+	
+	@RequestMapping("member/Mypage")
+	public String showMypage() {
+		return "usr/member/memberMypage";
+	}
+	
 	@RequestMapping("member/join")
 	public String ShowJoin() {
+		
 		return "usr/member/join";
 	}
 	
@@ -222,7 +228,7 @@ public class MemberController {
 			return Ut.jsHistoryBack("비번이 일치하지 않습니다.");
 		}
 		
-		memberService.findMemberforDrop(loginId,password);
+		memberService.findMemberforDrop(loginId,Ut.sha256(password));
 		
 		return Ut.jsReplace("회원탈퇴 완료됐습니다.","../member/login");
 	}
@@ -258,7 +264,10 @@ public class MemberController {
 		}
 		
 		
-		memberService.doMemberModify(id,password,cellphoneNo,email);
+		memberService.doMemberModify(id,Ut.sha256(password),cellphoneNo,email);
+		
+		// 회원정보 수정 후 로그아웃
+		rq.logout();
 		
 		return Ut.jsReplace("회원정보 수정이 완료됐습니다..","../member/login");
 	}
