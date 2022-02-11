@@ -12,6 +12,7 @@ public class Article {
 	String regDate;
 	String updateDate;
 	int boardId;
+	int hitCount;
 	String title;
 	String body;
 }

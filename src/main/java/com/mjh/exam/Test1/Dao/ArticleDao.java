@@ -26,4 +26,8 @@ public interface ArticleDao {
 
 	int getArticlesCount(@Param("boardId") int boardId,@Param("searchKeyword") String searchKeyword);
 
+	void doIncreaseHitCount(@Param("id") int id);
+
+	int ResultHitCount(int id);
+
 }

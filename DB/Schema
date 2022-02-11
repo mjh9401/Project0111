@@ -92,3 +92,18 @@ insert into article
 values
 (now(), now(), 2, concat('제목', floor(rand()*100)), CONCAT('내용', floor(rand()*100)));
 */
+
+# Reply 테이블 생성
+CREATE TABLE reply(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    articleId INT(10) UNSIGNED NOT NULL,
+    `body` TEXT NOT NULL
+);
+
+# 게시물 테이블에 hitCount칼럼 추가
+ALTER TABLE article
+ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+SELECT * FROM article;

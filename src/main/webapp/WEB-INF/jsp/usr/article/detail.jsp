@@ -10,7 +10,7 @@
         </colgroup>
         <tbody>
           <tr>
-            <th style="height:50px;">제목</th>
+            <th style="height:50px;">번호</th>
             <td>
                <p>${article.id}</p>
             </td>
@@ -19,6 +19,12 @@
             <th>제목</th>
             <td>
                <p>${article.title}</p>
+            </td>
+          </tr>
+          <tr>
+            <th>조회수</th>
+            <td>
+               <p class="hitCount">${article.hitCount}</p>
             </td>
           </tr>
           <tr>
@@ -68,5 +74,23 @@
 	  		</tbody>
 	  </table>
   </div>
-</section>               
+</section>
+<script>
+	function ArticleDetail_increaseHitCount(){
+		$.get('../article/doIncreaseHitCount',{
+			id:${article.id},
+			ajaxMode: 'Y'
+		},function(data){
+			$('.hitCount').html(data);
+			if (data != null) {
+				console.log('성공했습니다.');
+			} else {
+				console.log('실패했습니다.');
+			}
+		},'html');
+	}
+	
+	ArticleDetail_increaseHitCount();
+	
+</script>               
 <%@ include file = "../common/footer.jspf"%>

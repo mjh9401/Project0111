@@ -51,4 +51,12 @@ public class ArticleServcie {
 	public int getArticlesCount(int boardId, String searchKeyword) {
 		return articleDao.getArticlesCount(boardId,searchKeyword);
 	}
+
+	public void doIncreaseHitCount(int id) {
+		articleDao.doIncreaseHitCount(id);
+	}
+
+	public int ResultHitCount(int id) {
+		return articleDao.ResultHitCount(id);
+	}
 }

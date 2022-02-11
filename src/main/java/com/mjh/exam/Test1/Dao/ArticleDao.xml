@@ -47,6 +47,17 @@
 		and title like concat('%',#{searchKeyword},'%')
 	</select>
 	
+	<select id="ResultHitCount" resultType="int">
+		select hitCount from article
+		where id = #{id}
+	</select>
+	
+	<update id="doIncreaseHitCount">
+		update article
+		set hitCount = hitCount +1
+		where id = #{id}
+	</update>
+	
 	<delete id="doDelete">
 		delete from article 
 		where id = #{id}

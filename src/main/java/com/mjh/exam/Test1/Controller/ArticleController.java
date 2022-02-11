@@ -79,9 +79,20 @@ public class ArticleController {
 		if(article == null) {
 			return Ut.jsHistoryBack("해당 게시글은 존재하지 않습니다.");
 		}
+				
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";
+	}
+	
+	@RequestMapping("article/doIncreaseHitCount")
+	@ResponseBody
+	public int doIncreaseHitCount(int id) {
+		articleService.doIncreaseHitCount(id);
+		
+		int ResultHitCount = articleService.ResultHitCount(id);
+		
+		return ResultHitCount;
 	}
 	
 	@RequestMapping("article/delete")
