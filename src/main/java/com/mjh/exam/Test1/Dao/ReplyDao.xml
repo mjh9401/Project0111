@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.exam.Test1.Dao.ReplyDao">
+	<insert id="doWrite">
+		insert into reply
+		set regDate = now(),
+		updateDate = now(),
+		articleId = #{articleId},
+		memberId = #{memberId},
+		body = #{body}
+	</insert>
+	
+	<select id="SearchRepliesByArticleId" resultType="Reply">
+		select * from reply
+		where articleId = #{id}
+		order by id desc;
+	</select>
+	
+	<delete id="doDelete">
+		delete from reply
+		where id =#{replyId}
+	</delete>
+</mapper>

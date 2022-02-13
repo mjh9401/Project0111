@@ -54,7 +54,9 @@
 	  		<tbody>
 	  		<tr>
 		  		<form action="../reply/doWrite" method="get">
-		  			<input type="hidden" name="articldeId" value="${article.id}" />
+		  			<input type="hidden" name = "articleId" value="${article.id}">
+		  			<input type="hidden" name ="memberId" value="${rq.loginedMemberId}" />
+		  			
 					<th>테스트1</th>
 		  			<td>
 		  				<textarea name="body" cols="100" rows="1" placeholder="댓글을 입력해주세요"></textarea>
@@ -64,17 +66,48 @@
 		  			</td>
 		  		</form>
 	  		</tr>
-
+				
 	  		<c:forEach var="reply" items="${replies}">
-	  			<tr>
-	  				<td>이름</td>
-	  				<td>${reply.body}</td>
-	  			</tr>
+	  			<c:choose>
+	  				<c:when test="${modifySignal != null}">
+	  					<tr>
+	  						<form action="../reply/doModify">
+				  				<td>이름</td>
+				  				<td><textarea name="body" cols="100" rows="1" placeholder="댓글을 입력해주세요">${reply.body}</textarea></td>
+				  				<c:if test="${reply.memberId == rq.loginedMemberId}">
+					  				<td>
+					  					<button class="btn btn-xs" type="button" onclick="history.back();">취소</button>
+					  					<input class="btn btn-xs" type="submit" >
+					  						<a href="../reply/modifySignal?replyId=${reply.id}" >수정</a>
+					  					</input>
+					  				</td>
+				  				</c:if>	
+			  				</form>  					
+			  			</tr>
+	  				</c:when>
+	  				<c:otherwise>
+			  			<tr>
+			  				<td>이름</td>
+			  				<td>${reply.body}</td>
+			  				<c:if test="${reply.memberId == rq.loginedMemberId}">
+				  				<td>
+				  					<button class="btn btn-xs" type="button" >
+				  						<a href="../reply/doDelete?replyId=${reply.id}">삭제</a>
+				  					</button>
+				  					<button class="btn btn-xs" type="button" >
+				  						<a href="../reply/modifySignal?articleId=${article.id}" >수정</a>
+				  					</button>
+				  				</td>
+			  				</c:if>	  					
+			  			</tr>
+		  			</c:otherwise>
+	  			</c:choose>
 	  		</c:forEach>
 	  		</tbody>
 	  </table>
   </div>
 </section>
+
 <script>
 	function ArticleDetail_increaseHitCount(){
 		$.get('../article/doIncreaseHitCount',{
@@ -92,5 +125,6 @@
 	
 	ArticleDetail_increaseHitCount();
 	
-</script>               
+</script>
+               
 <%@ include file = "../common/footer.jspf"%>

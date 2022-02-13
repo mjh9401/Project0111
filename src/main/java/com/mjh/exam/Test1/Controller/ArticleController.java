@@ -1,6 +1,7 @@
 package com.mjh.exam.Test1.Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mjh.exam.Test1.Dto.Article;
+import com.mjh.exam.Test1.Dto.Reply;
+import com.mjh.exam.Test1.Dto.Rq;
 import com.mjh.exam.Test1.Service.ArticleServcie;
+import com.mjh.exam.Test1.Service.ReplyService;
 import com.mjh.exam.Test1.Ut.Ut;
 
 @Controller
 public class ArticleController {
 	@Autowired
+	Rq rq;
+	@Autowired
 	private ArticleServcie articleService;
-	
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping("article/list")
 	public String showList(Model model, int boardId,@RequestParam(defaultValue = "1") int page,
@@ -31,7 +38,7 @@ public class ArticleController {
 		
 		// 해당 게시글 전체 가져오기
 		ArrayList<Article> articles= articleService.list(boardId,searchKeyword,page,itemsCountInAPage);
-		
+				
 		model.addAttribute("articles", articles);
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("articlesCount", articlesCount);
@@ -41,6 +48,23 @@ public class ArticleController {
 		model.addAttribute("searchKeyword", searchKeyword);
 		
 		return "usr/article/list";
+	}
+	
+	@RequestMapping("article/detail")
+	public String detail(Model model,int id) {
+
+		Article article = articleService.searchArticleByid(id);
+		
+		if(article == null) {
+			return Ut.jsHistoryBack("해당 게시글은 존재하지 않습니다.");
+		}
+		
+		List<Reply>replies = replyService.SearchRepliesByArticleId(id);
+		
+		model.addAttribute("article", article);
+		model.addAttribute("replies", replies);
+		
+		return "usr/article/detail";
 	}
 	
 	@RequestMapping("article/write")
@@ -71,19 +95,7 @@ public class ArticleController {
 		return Ut.jsReplace("게시글 작성이 완료됐습니다.", "../article/list?boardId="+boardId);
 	}
 	
-	@RequestMapping("article/detail")
-	public String detail(Model model,int id) {
-
-		Article article = articleService.searchArticleByid(id);
-		
-		if(article == null) {
-			return Ut.jsHistoryBack("해당 게시글은 존재하지 않습니다.");
-		}
-				
-		model.addAttribute("article", article);
-		
-		return "usr/article/detail";
-	}
+	
 	
 	@RequestMapping("article/doIncreaseHitCount")
 	@ResponseBody
