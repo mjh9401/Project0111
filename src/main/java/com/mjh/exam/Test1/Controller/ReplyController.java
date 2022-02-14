@@ -36,10 +36,15 @@ public class ReplyController {
 	
 	@RequestMapping("reply/modifySignal")
 	public String modifySignal(HttpServletRequest req,int articleId) {
-		String modifySignal = "yes";
 		
-		req.setAttribute("modifySignal", modifySignal);
+		return "redirect:/article/detail?id="+articleId+"&flag=u";
+	}
+	
+	@RequestMapping("reply/doModify")
+	@ResponseBody
+	public String domodify(int replyId,int articleId,int memberId,String body) {
+		replyService.doModify(replyId,articleId,memberId,body);
 		
-		return "redirect:/article/detail?id="+articleId;
+		return Ut.jsReplace("댓글 수정 완료됐습니다.", "../main");
 	}
 }

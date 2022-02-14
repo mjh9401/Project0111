@@ -3,6 +3,8 @@ package com.mjh.exam.Test1.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +53,7 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("article/detail")
-	public String detail(Model model,int id) {
+	public String detail(Model model,int id,HttpServletRequest req) {
 
 		Article article = articleService.searchArticleByid(id);
 		
@@ -60,6 +62,13 @@ public class ArticleController {
 		}
 		
 		List<Reply>replies = replyService.SearchRepliesByArticleId(id);
+		
+		String flag = req.getParameter("flag");
+		
+		if(flag != null) {
+			req.setAttribute("flag", flag);
+		}
+		
 		
 		model.addAttribute("article", article);
 		model.addAttribute("replies", replies);

@@ -25,4 +25,8 @@ public class ReplyService {
 	public void doDelete(int replyId) {
 		replyDao.doDelete(replyId);
 	}
+
+	public void doModify(int replyId, int articleId, int memberId, String body) {
+		replyDao.doModify(replyId,articleId,memberId,body);
+	}
 }	

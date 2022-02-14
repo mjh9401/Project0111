@@ -16,6 +16,17 @@
 		order by id desc;
 	</select>
 	
+	<update id="doModify">
+		update reply
+		<set>
+			updateDate = now(),
+			articleId = #{articleId},
+			memberId = #{memberId},
+			body = #{body}
+		</set>
+		where id = #{replyId}
+	</update>
+	
 	<delete id="doDelete">
 		delete from reply
 		where id =#{replyId}

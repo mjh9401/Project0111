@@ -69,17 +69,19 @@
 				
 	  		<c:forEach var="reply" items="${replies}">
 	  			<c:choose>
-	  				<c:when test="${modifySignal != null}">
+	  				<c:when test="${flag != null}">
 	  					<tr>
 	  						<form action="../reply/doModify">
+	  							<input type="hidden" name="replyId" value="${reply.id}" />
+	  							<input type="hidden" name="articleId" value="${article.id}" />
+	  							<input type="hidden" name="memberId" value="${rq.loginedMemberId}" />
+	  							
 				  				<td>이름</td>
 				  				<td><textarea name="body" cols="100" rows="1" placeholder="댓글을 입력해주세요">${reply.body}</textarea></td>
 				  				<c:if test="${reply.memberId == rq.loginedMemberId}">
 					  				<td>
 					  					<button class="btn btn-xs" type="button" onclick="history.back();">취소</button>
-					  					<input class="btn btn-xs" type="submit" >
-					  						<a href="../reply/modifySignal?replyId=${reply.id}" >수정</a>
-					  					</input>
+					  					<input class="btn btn-xs" type="submit"  value="완료"/>
 					  				</td>
 				  				</c:if>	
 			  				</form>  					
